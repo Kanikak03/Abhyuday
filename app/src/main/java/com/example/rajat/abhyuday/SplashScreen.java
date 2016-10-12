@@ -1,18 +1,19 @@
 package com.example.rajat.abhyuday;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
-
+import com.example.rajat.abhyuday.Home;
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class StartActivity extends AppCompatActivity {
+public class SplashScreen extends AppCompatActivity {
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -31,6 +32,7 @@ public class StartActivity extends AppCompatActivity {
      */
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler();
+    final Handler handler=new Handler();
     private View mContentView;
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
@@ -92,6 +94,15 @@ public class StartActivity extends AppCompatActivity {
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content_controls);
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent mHome=new Intent(SplashScreen.this,Home.class);
+                SplashScreen.this.startActivity(mHome);
+                SplashScreen.this.finish();
+            }
+        },3000);
 
 
         // Set up the user interaction to manually show or hide the system UI.

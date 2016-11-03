@@ -16,17 +16,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.rajat.abhyuday.dummy.DummyContent;
 
 public class Home extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener , CallFragment.OnFragmentInteractionListener
+        implements NavigationView.OnNavigationItemSelectedListener , CallFragment.OnFragmentInteractionListener, RegisterFragment.OnFragmentInteractionListener
         {
 
             @Override
             public void onFragmentInteraction(Uri uri) {
 
             }
+
 
             @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,11 +100,21 @@ public class Home extends AppCompatActivity
 
         } else if (id == R.id.nav_register) {
 
+            RegisterFragment rf=new RegisterFragment();
+            FragmentManager manager=getSupportFragmentManager();
+            manager.beginTransaction().replace(R.id.content_home,new RegisterFragment()).commit();
+
+            Toast.makeText(this,"Register",Toast.LENGTH_LONG).show();
+
+
+
+
         } else if (id == R.id.nav_conus) {
 
             CallFragment Callfragment=new CallFragment();
             FragmentManager manager=getSupportFragmentManager();
-            manager.beginTransaction().add(R.id.content_home,new CallFragment()).commit();
+            manager.beginTransaction().replace(R.id.content_home,new CallFragment()).commit();
+
 
         } else if (id == R.id.nav_abtus) {
 

@@ -4,27 +4,28 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ListFragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.EditText;
+
+//import android.app.Fragment;
+
+
+
+
 
 
 /**
- * A simple {@link android.app.Fragment} subclass.
+ * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link CallFragment.OnFragmentInteractionListener} interface
+ * {@link RegisterFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link CallFragment#newInstance} factory method to
+ * Use the {@link RegisterFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CallFragment extends ListFragment implements OnItemClickListener{
+public class RegisterFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -36,7 +37,15 @@ public class CallFragment extends ListFragment implements OnItemClickListener{
 
     private OnFragmentInteractionListener mListener;
 
-    public CallFragment() {
+    // Variables
+
+    EditText name;
+    EditText mobile;
+    EditText email;
+    EditText address;
+    EditText category;
+
+    public RegisterFragment() {
         // Required empty public constructor
     }
 
@@ -46,11 +55,11 @@ public class CallFragment extends ListFragment implements OnItemClickListener{
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment CallFragment.
+     * @return A new instance of fragment RegisterFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CallFragment newInstance(String param1, String param2) {
-        CallFragment fragment = new CallFragment();
+    public static RegisterFragment newInstance(String param1, String param2) {
+        RegisterFragment fragment = new RegisterFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,32 +74,13 @@ public class CallFragment extends ListFragment implements OnItemClickListener{
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Object obj=getListAdapter().getItem(position);
-        String num=obj.toString();
-        Intent intent=new Intent(Intent.ACTION_DIAL,Uri.parse("tel:"+num));
-        //intent.setPackage("com.android.phone");
-        //intent.setPackage("com.android.server.telecom");
-        //intent.setData();
-        startActivity(intent);
-
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-
-
-        return inflater.inflate(R.layout.fragment_call, container, false);
+        return inflater.inflate(R.layout.fragment_register, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -98,17 +88,6 @@ public class CallFragment extends ListFragment implements OnItemClickListener{
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        ArrayAdapter adapter = ArrayAdapter.createFromResource(getActivity(), R.array.Contacts, android.R.layout.simple_list_item_1);
-        setListAdapter(adapter);
-        getListView().setOnItemClickListener((OnItemClickListener) this);
-        ListView lv=(ListView)getView().findViewById(android.R.id.list);
-        lv.setAdapter(adapter);
-        Toast.makeText(getContext(),"Contacts",Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -120,6 +99,31 @@ public class CallFragment extends ListFragment implements OnItemClickListener{
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+    }
+
+    public void insert(View v)
+    {
+        name=(EditText)getView().findViewById(R.id.reg_name);
+        email=(EditText)getView().findViewById(R.id.reg_id);
+        mobile=(EditText)getView().findViewById(R.id.reg_mob);
+        address=(EditText)getView().findViewById(R.id.reg_add);
+        category=(EditText)getView().findViewById(R.id.reg_cat);
+        String sname=name.getText().toString();
+        String semail=email.getText().toString();
+        String smob=mobile.getText().toString();
+        String sadd=address.getText().toString();
+        String scat=category.getText().toString();
+
+
+
+
     }
 
     @Override

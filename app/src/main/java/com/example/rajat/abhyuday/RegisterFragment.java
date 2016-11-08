@@ -43,7 +43,7 @@ public class RegisterFragment extends Fragment {
     EditText mobile;
     EditText email;
     EditText address;
-    EditText category;
+    EditText password;
 
     public RegisterFragment() {
         // Required empty public constructor
@@ -114,13 +114,13 @@ public class RegisterFragment extends Fragment {
         email=(EditText)getView().findViewById(R.id.reg_id);
         mobile=(EditText)getView().findViewById(R.id.reg_mob);
         address=(EditText)getView().findViewById(R.id.reg_add);
-        category=(EditText)getView().findViewById(R.id.reg_cat);
+        password=(EditText)getView().findViewById(R.id.reg_pass);
         String sname=name.getText().toString();
         String semail=email.getText().toString();
         String smob=mobile.getText().toString();
         String sadd=address.getText().toString();
-        String scat=category.getText().toString();
-
+        String spass=password.getText().toString();
+        new RegisterActivity(getContext()).execute(sname,semail,smob,sadd,spass);
 
 
 

@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.2"
-    useLibrary 'org.apache.http.legacy'
+
     defaultConfig {
         applicationId "com.example.rajat.abhyuday"
         minSdkVersion 23
@@ -12,6 +12,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        useLibrary 'org.apache.http.legacy'
     }
     buildTypes {
         release {
@@ -34,4 +35,5 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:24.2.0'
     testCompile 'junit:junit:4.12'
     compile 'org.jetbrains:annotations-java5:15.0'
+    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
 }

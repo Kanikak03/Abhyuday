@@ -1,6 +1,7 @@
 package com.example.rajat.abhyuday;
 
 import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -11,9 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-
-
 
 //import butterknife.ButterKnife;
 //import butterknife.Bind;
@@ -34,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         //ButterKnife.bind(this);
         _emailText=(EditText)findViewById(R.id.input_email);
-        _passwordText=(EditText)findViewById(R.id.input_address);
+        _passwordText=(EditText)findViewById(R.id.input_password);
         _loginButton=(Button)findViewById(R.id.btn_login);
         _signupLink=(TextView)findViewById(R.id.link_signup);
         _link_guest=(TextView)findViewById(R.id.link_guest);
@@ -81,28 +79,64 @@ public class LoginActivity extends AppCompatActivity {
 
         _loginButton.setEnabled(false);
 
+        new loginTask().execute();
+
+    }
+    private class loginTask extends AsyncTask<String,Void,Void> {
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
                 R.style.AppTheme_Dark_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Authenticating...");
-        progressDialog.show();
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
 
-        String email = _emailText.getText().toString();
-        String password = _passwordText.getText().toString();
 
-        // TODO: Implement your own authentication logic here.
+            progressDialog.setIndeterminate(true);
+            progressDialog.setMessage("Authenticating...");
+            progressDialog.show();
+        }
 
-        new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        // On complete call either onLoginSuccess or onLoginFailed
-                        onLoginSuccess();
-                        // onLoginFailed();
-                        progressDialog.dismiss();
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            new android.os.Handler().postDelayed(
+                    new Runnable() {
+                        public void run() {
+                            // On complete call either onLoginSuccess or onLoginFailed
+//
+
+                            progressDialog.dismiss();
+                        }
+                    }, 3000);
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected Void doInBackground(String... params) {
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    String email = _emailText.getText().toString();
+                    String password = _passwordText.getText().toString();
+
+                    if (email.equals("admin@admin.com") && password.equals("admin")) {
+                       onLoginSuccess();
+                    } else {
+                        onLoginFailed();
                     }
-                }, 3000);
-    }
 
+
+                }
+            });
+            return null;
+        }
+
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -124,13 +158,20 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
-        finish();
+        //Toast.makeText(getApplicationContext(), _emailText.toString(), Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(getApplicationContext(), Home.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        //finish();
+        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+        //finish();
+
     }
 
     public void onLoginFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
-
         _loginButton.setEnabled(true);
+        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+        //finish();
     }
 
     public boolean validate() {

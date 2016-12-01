@@ -37,6 +37,9 @@
         <activity
             android:name="com.example.rajat.abhyuday.SignupActivity"
             android:theme="@style/AppTheme.Dark" />
+        <activity
+            android:name="com.example.rajat.abhyuday.RegisterEvent"
+            android:theme="@style/AppTheme.Dark" />
     </application>
     <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
          App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->

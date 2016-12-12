@@ -20,35 +20,14 @@ import com.daimajia.androidanimations.library.YoYo;
 
 import java.util.List;
 
-/**
- * Created by Ravi Tamada on 18/05/16.
- */
 public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHolder> {
 
+    public ImageView thumbnail;
     private Context mContext;
     private List<Album> albumList;
 
-    public ImageView thumbnail;
 
-
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, count;
-        CardView cardView;
-        public ImageView overflow,thumbnail;
-
-        public MyViewHolder(View view) {
-            super(view);
-            title = (TextView) view.findViewById(R.id.title);
-            count = (TextView) view.findViewById(R.id.count);
-            thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
-            overflow = (ImageView) view.findViewById(R.id.overflow);
-            cardView= (CardView) itemView.findViewById(R.id.card_view);
-
-        }
-    }
-
-
-    public AlbumsAdapter(Context mContext, List<Album> albumList) {
+    public AlbumsAdapter(EventActivity mContext, List<Album> albumList) {
         this.mContext = mContext;
         this.albumList = albumList;
     }
@@ -107,6 +86,27 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
         popup.show();
     }
 
+    @Override
+    public int getItemCount() {
+        return albumList.size();
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView title, count;
+        public ImageView overflow, thumbnail;
+        CardView cardView;
+
+        public MyViewHolder(View view) {
+            super(view);
+            title = (TextView) view.findViewById(R.id.title);
+            count = (TextView) view.findViewById(R.id.count);
+            thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
+            overflow = (ImageView) view.findViewById(R.id.overflow);
+            cardView = (CardView) itemView.findViewById(R.id.card_view);
+
+        }
+    }
+
     /**
      * Click listener for popup menu items
      */
@@ -128,10 +128,5 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
             }
             return false;
         }
-    }
-
-    @Override
-    public int getItemCount() {
-        return albumList.size();
     }
 }

@@ -22,6 +22,13 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import static com.example.rajat.abhyuday.R.id;
 import static com.example.rajat.abhyuday.R.layout;
@@ -30,8 +37,10 @@ import static com.example.rajat.abhyuday.R.string;
 //import android.app.Fragment;
 
 public class Home extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, CallFragment.OnFragmentInteractionListener, RegisterFragment.OnFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener, CallFragment.OnFragmentInteractionListener, RegisterFragment.OnFragmentInteractionListener, OnMapReadyCallback {
 
+
+    SupportMapFragment smapfragment;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -51,7 +60,7 @@ public class Home extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //supportMapFragment=SupportMapFragment.newInstance();
+        smapfragment = SupportMapFragment.newInstance();
         setContentView(layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(id.toolbar);
         setSupportActionBar(toolbar);
@@ -78,7 +87,7 @@ public class Home extends AppCompatActivity
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-
+        smapfragment.getMapAsync(this);
 
     }
 
@@ -119,15 +128,16 @@ public class Home extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         android.support.v4.app.FragmentManager fm=getSupportFragmentManager();
+        android.support.v4.app.FragmentManager sfm = getSupportFragmentManager();
 
+        if (smapfragment.isAdded()) {
+            sfm.beginTransaction().hide(smapfragment).commit();
+
+        }
         int id = item.getItemId();
 
         if (id == R.id.nav_event) {
 
-
-//            EventFragment rf = new EventFragment();
-//            FragmentManager manager = getSupportFragmentManager();
-//            manager.beginTransaction().replace(R.id.content_home, new EventFragment()).commit();
             Intent mHome = new Intent(Home.this, EventActivity.class);
             Home.this.startActivity(mHome);
             Home.this.finish();
@@ -144,18 +154,14 @@ public class Home extends AppCompatActivity
 
 
         } else if (id == R.id.nav_findus) {
+//            Intent mHome = new Intent(Home.this, MapsActivity.class);
+//            Home.this.startActivity(mHome);
+//            Home.this.finish();
 
-//
-//            MapFragment mapf;
-//        mapf=((MapFragment) getFragmentManager().findFragmentById(R.id.map));
-//        mapf.getMapAsync(MapsActivity.OnMapReadyCallback);
-
-       //MapsActivity ma = new MapsActivity();
-            //android.app.FragmentManager manager = getFragmentManager();
-           // manager.beginTransaction().replace(R.id.content_home, ma).commit();
-
-
-
+            if (!smapfragment.isAdded())
+                sfm.beginTransaction().replace(R.id.map, smapfragment).commit();
+            else
+                sfm.beginTransaction().show(smapfragment).commit();
 
         }else if (id == R.id.nav_conus) {
 
@@ -229,6 +235,38 @@ public class Home extends AppCompatActivity
     }
 
 
+    @Override
+    public void onMapReady(GoogleMap mMap) {
 
+//        LocationRequest mLocationRequest;
+//
+//        GoogleApiClient mGoogleApiClient;
+
+
+        //private static final LatLng MSRIT = new LatLng(13.0311221, 77.5651647);
+        LatLng MSRIT = new LatLng(12.9718915, 77.6411545);
+
+        Marker mMsrit;
+
+
+        // Add a marker in Sydney and move the camera
+
+
+        mMsrit = mMap.addMarker(new MarkerOptions()
+                .position(MSRIT)
+                .title("MSRIT")
+                .flat(true)
+        );
+        mMsrit.setTag(0);
+        //mMap.setOnMarkerClickListener(this);
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MSRIT, 13));
+
+        mMap.animateCamera(CameraUpdateFactory.zoomIn());
+
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(13), 2000, null);
+
+
+    }
 
 }

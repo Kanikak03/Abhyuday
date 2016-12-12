@@ -23,6 +23,11 @@
     <item android:title="Communicate">
         <menu>
             <item
+                android:id="@+id/nav_findus"
+                android:title="Locate Us"
+                android:icon="@drawable/ic_place_black_24dp"
+                ></item>
+            <item
                 android:id="@+id/nav_conus"
                 android:icon="@drawable/ic_call_black_24dp"
                 android:title="Contact Us" />

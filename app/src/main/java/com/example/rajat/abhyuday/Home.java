@@ -130,10 +130,9 @@ public class Home extends AppCompatActivity
         android.support.v4.app.FragmentManager fm=getSupportFragmentManager();
         android.support.v4.app.FragmentManager sfm = getSupportFragmentManager();
 
-        if (smapfragment.isAdded()) {
-            sfm.beginTransaction().hide(smapfragment).commit();
 
-        }
+
+
         int id = item.getItemId();
 
         if (id == R.id.nav_event) {
@@ -145,10 +144,20 @@ public class Home extends AppCompatActivity
         } else if (id == R.id.nav_schedule) {
 
         } else if (id == R.id.nav_register) {
+            if (smapfragment.isAdded()) {
+                sfm.beginTransaction().hide(smapfragment).commit();
 
-            RegisterFragment rf = new RegisterFragment();
-            FragmentManager manager = getSupportFragmentManager();
-            manager.beginTransaction().replace(R.id.content_home, new RegisterFragment()).commit();
+            }
+
+
+            android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
+            RegisterFragment registerFragment=new RegisterFragment();
+
+            if(! registerFragment.isAdded()) {
+                manager.beginTransaction().replace(R.id.content_home, registerFragment).commit();
+            }
+//            else
+//                manager.beginTransaction().show(registerFragment).commit();
 
             Toast.makeText(this, "Register", Toast.LENGTH_LONG).show();
 
@@ -158,16 +167,29 @@ public class Home extends AppCompatActivity
 //            Home.this.startActivity(mHome);
 //            Home.this.finish();
 
-            if (!smapfragment.isAdded())
+
+            if (!smapfragment.isAdded()) {
                 sfm.beginTransaction().replace(R.id.map, smapfragment).commit();
+
+            }
             else
                 sfm.beginTransaction().show(smapfragment).commit();
 
         }else if (id == R.id.nav_conus) {
+            if (smapfragment.isAdded()) {
+                sfm.beginTransaction().hide(smapfragment).commit();
 
-            CallFragment Callfragment = new CallFragment();
-            FragmentManager manager = getSupportFragmentManager();
-            manager.beginTransaction().replace(R.id.content_home, new CallFragment()).commit();
+            }
+
+
+            android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
+            CallFragment callFragment=new CallFragment();
+
+            if(!callFragment.isAdded()) {
+                manager.beginTransaction().replace(R.id.content_home, callFragment).commit();
+            }
+//            else
+//                manager.beginTransaction().show(callFragment).commit();
 
 
         }

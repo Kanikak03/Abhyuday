@@ -18,10 +18,10 @@ import java.net.URL;
 /**
  * Created by rajat on 08-11-2016.
  */
-public class RegisterActivity extends AsyncTask<String,Void,String> {
+public class EventActivityDB extends AsyncTask<String,Void,String> {
 
     Context context;
-    public RegisterActivity(Context context) {
+    public EventActivityDB(Context context) {
 
         this.context=context;
     }
@@ -47,11 +47,11 @@ public class RegisterActivity extends AsyncTask<String,Void,String> {
             String name = (String) arg0[0];
             String email = (String) arg0[1];
             String mobile= (String) arg0[2];
-            String address = (String) arg0[3];
-            String password =(String) arg0[4];
+            String event = (String) arg0[3];
 
-            String link = IPAddress.IP+"RegisterInsert.php?name=" + name + "&password=" + password + "&email=" + email +"&mobile="
-                    + mobile + "&address=" + address ;
+
+            String link = IPAddress.IP+"EventInsert.php?name=" + name + "&email=" + email +"&mobile="
+                    + mobile + "&event=" + event ;
             System.out.println(link+"");
 
             URL url = new URL(link);

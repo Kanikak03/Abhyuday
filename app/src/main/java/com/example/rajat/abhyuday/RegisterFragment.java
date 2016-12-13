@@ -108,8 +108,10 @@ public class RegisterFragment extends Fragment {
 
     }
 
+
     public void insert(View v)
     {
+
         name=(EditText)getView().findViewById(R.id.reg_name);
         email=(EditText)getView().findViewById(R.id.reg_id);
         mobile=(EditText)getView().findViewById(R.id.reg_mob);
@@ -120,10 +122,6 @@ public class RegisterFragment extends Fragment {
         String smob=mobile.getText().toString();
         String sadd=address.getText().toString();
         String spass=password.getText().toString();
-        new RegisterActivity(getContext()).execute(sname,semail,smob,sadd,spass);
-
-
-
     }
 
     @Override

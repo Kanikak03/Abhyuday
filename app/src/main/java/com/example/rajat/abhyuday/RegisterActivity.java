@@ -50,7 +50,7 @@ public class RegisterActivity extends AsyncTask<String,Void,String> {
             String address = (String) arg0[3];
             String password =(String) arg0[4];
 
-            String link = "http://192.168.1.7/RegisterInsert.php?name=" + name + "&password=" + password + "&email=" + email +"&mobile="
+            String link = "http://192.168.43.121/RegisterInsert.php?name=" + name + "&password=" + password + "&email=" + email +"&mobile="
                     + mobile + "&address=" + address ;
             System.out.println(link+"");
 

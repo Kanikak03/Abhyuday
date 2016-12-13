@@ -127,14 +127,18 @@ public class Home extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         android.support.v4.app.FragmentManager fm=getSupportFragmentManager();
         android.support.v4.app.FragmentManager sfm = getSupportFragmentManager();
 
+        if (smapfragment.isAdded()) {
+            sfm.beginTransaction().hide(smapfragment).commit();
 
+        }
 
-
-        int id = item.getItemId();
-
+            int id = item.getItemId();
         if (id == R.id.nav_event) {
 
             Intent mHome = new Intent(Home.this, EventActivity.class);
@@ -144,21 +148,11 @@ public class Home extends AppCompatActivity
         } else if (id == R.id.nav_schedule) {
 
         } else if (id == R.id.nav_register) {
-            if (smapfragment.isAdded()) {
-                sfm.beginTransaction().hide(smapfragment).commit();
-
-            }
 
 
-            android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
             RegisterFragment registerFragment=new RegisterFragment();
 
-            if(! registerFragment.isAdded()) {
-                manager.beginTransaction().replace(R.id.content_home, registerFragment).commit();
-            }
-//            else
-//                manager.beginTransaction().show(registerFragment).commit();
-
+            fm.beginTransaction().replace(R.id.content_home, registerFragment).commit();
             Toast.makeText(this, "Register", Toast.LENGTH_LONG).show();
 
 
@@ -168,37 +162,17 @@ public class Home extends AppCompatActivity
 //            Home.this.finish();
 
 
-            if (!smapfragment.isAdded()) {
-                sfm.beginTransaction().replace(R.id.map, smapfragment).commit();
-
-            }
-            else
-                sfm.beginTransaction().show(smapfragment).commit();
+            sfm.beginTransaction().replace(R.id.content_home, smapfragment).commit();
 
         }else if (id == R.id.nav_conus) {
-            if (smapfragment.isAdded()) {
-                sfm.beginTransaction().hide(smapfragment).commit();
 
-            }
-
-
-            android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
-            CallFragment callFragment=new CallFragment();
-
-            if(!callFragment.isAdded()) {
-                manager.beginTransaction().replace(R.id.content_home, callFragment).commit();
-            }
-//            else
-//                manager.beginTransaction().show(callFragment).commit();
-
+            CallFragment callFragment = new CallFragment();
+            fm.beginTransaction().replace(R.id.content_home, callFragment).commit();
 
         }
         else if (id == R.id.nav_abtus) {
 
         }
-
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

@@ -146,20 +146,20 @@ public class Home extends AppCompatActivity
             Home.this.finish();
 
         } else if (id == R.id.nav_schedule) {
+        }
 
-        } else if (id == R.id.nav_register) {
+//        } else if (id == R.id.nav_register) {
+//
+//
+//            RegisterFragment registerFragment=new RegisterFragment();
+//
+//            fm.beginTransaction().replace(R.id.content_home, registerFragment).commit();
+//            Toast.makeText(this, "Register", Toast.LENGTH_LONG).show();
+//
+//
+//        }
+else if (id == R.id.nav_findus) {
 
-
-            RegisterFragment registerFragment=new RegisterFragment();
-
-            fm.beginTransaction().replace(R.id.content_home, registerFragment).commit();
-            Toast.makeText(this, "Register", Toast.LENGTH_LONG).show();
-
-
-        } else if (id == R.id.nav_findus) {
-//            Intent mHome = new Intent(Home.this, MapsActivity.class);
-//            Home.this.startActivity(mHome);
-//            Home.this.finish();
 
 
             sfm.beginTransaction().replace(R.id.content_home, smapfragment).commit();

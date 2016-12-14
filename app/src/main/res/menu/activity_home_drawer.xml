@@ -6,10 +6,10 @@
             android:id="@+id/nav_event"
             android:icon="@drawable/ic_event_available_black_24dp"
             android:title="Events" />
-        <item
-            android:id="@+id/nav_register"
-            android:icon="@drawable/ic_border_color_black_24dp"
-            android:title="Register" />
+        <!--<item-->
+            <!--android:id="@+id/nav_register"-->
+            <!--android:icon="@drawable/ic_border_color_black_24dp"-->
+            <!--android:title="Register" />-->
         <item
             android:id="@+id/nav_schedule"
             android:icon="@drawable/ic_date_range_black_24dp"

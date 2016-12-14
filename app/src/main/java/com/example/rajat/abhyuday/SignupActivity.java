@@ -2,6 +2,7 @@ package com.example.rajat.abhyuday;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,6 +11,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URL;
 
 //import butterknife.ButterKnife;
 //import butterknife.Bind;
@@ -25,6 +36,17 @@ public class SignupActivity extends AppCompatActivity {
     EditText _reEnterPasswordText;
     Button _signupButton;
      TextView _loginLink;
+
+    String name;
+
+    String address;
+    String email;
+
+    String mobile;
+
+    String password;
+
+    String reEnterPassword;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,7 +83,102 @@ public class SignupActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
             }
         });
+
+
+        name = _nameText.getText().toString();
+        address = _addressText.getText().toString();
+        email = _emailText.getText().toString();
+        mobile = _mobileText.getText().toString();
+        password = _passwordText.getText().toString();
+
+
     }
+
+    //register task
+    private class RegisterTask extends AsyncTask<String,Void,String> {
+        final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this,
+                R.style.AppTheme_Dark_Dialog);
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+
+            progressDialog.setIndeterminate(true);
+            progressDialog.setMessage("Creating Account...");
+            progressDialog.show();
+        }
+
+        @Override
+        protected void onPostExecute(final String s) {
+            super.onPostExecute(s);
+            new android.os.Handler().postDelayed(
+                    new Runnable() {
+                        public void run() {
+                            // On complete call either onLoginSuccess or onLoginFailed
+                            progressDialog.dismiss();
+                        }
+                    }, 3000);
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected String doInBackground(final String... arg0) {
+            final String name = (String) arg0[0];
+            final String email = (String) arg0[1];
+            final String mobile= (String) arg0[2];
+            final String address = (String) arg0[3];
+            final String password =(String) arg0[4];
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    try{
+
+                        String result="";
+                        String link = IPAddress.IP+"RegisterInsert.php?name=" + name + "&password=" + password + "&email=" + email +"&mobile="
+                                + mobile + "&address=" + address ;
+                        System.out.println(link+"");
+
+                        URL url = new URL(link);
+                        HttpClient client = new DefaultHttpClient();
+                        HttpGet request = new HttpGet();
+                        request.setURI(new URI(link));
+                        HttpResponse response = client.execute(request);
+                        BufferedReader in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+
+                        StringBuffer sb = new StringBuffer("");
+                        String line = "";
+
+                        while ((line = in.readLine()) != null) {
+                            sb.append(line);
+                            Log.i("INFO", "Line ---> " + line);
+                            break;
+                        }
+                        in.close();
+                        result=sb.toString();
+                        if (result.isEmpty()) {
+
+                            onSignupFailed();
+                        }
+                        else {
+                            onSignupSuccess();
+                        }
+                    }
+                    catch (Exception e) {
+                        System.out.print(("Exception: " + e.getMessage()));
+                    }
+                }
+            });
+            return null;
+        }
+
+    }
+
 
     public void signup() {
         Log.d(TAG, "Signup");
@@ -70,34 +187,15 @@ public class SignupActivity extends AppCompatActivity {
             onSignupFailed();
             return;
         }
+        else
+        {
+            new RegisterTask().execute(name,email,mobile,address,password);
+
+        }
 
         _signupButton.setEnabled(false);
 
-        final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this,
-                R.style.AppTheme_Dark_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Creating Account...");
-        progressDialog.show();
 
-        String name = _nameText.getText().toString();
-        String address = _addressText.getText().toString();
-        String email = _emailText.getText().toString();
-        String mobile = _mobileText.getText().toString();
-        String password = _passwordText.getText().toString();
-        String reEnterPassword = _reEnterPasswordText.getText().toString();
-
-        // TODO: Implement your own signup logic here.
-
-        new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        // On complete call either onSignupSuccess or onSignupFailed
-                        // depending on success
-                        onSignupSuccess();
-                        // onSignupFailed();
-                        progressDialog.dismiss();
-                    }
-                }, 3000);
     }
 
 

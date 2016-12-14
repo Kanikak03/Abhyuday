@@ -21,5 +21,13 @@ public class eventdetails extends AppCompatActivity {
         img=(ImageView)findViewById(R.id.thumbnail);
         img.setImageResource(bundle.getInt("img"));
 
+        TextView desc;
+        desc=(TextView)findViewById(R.id.desc);
+        desc.setText(bundle.getString("desc"));
+
+        TextView rules;
+        rules=(TextView)findViewById(R.id.link_login);
+        rules.setText(bundle.getString("rules"));
+
     }
 }

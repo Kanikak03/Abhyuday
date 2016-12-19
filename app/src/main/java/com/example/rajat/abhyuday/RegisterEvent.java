@@ -40,11 +40,11 @@ public class RegisterEvent extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
+        setContentView(R.layout.activity_event_register_user);
         //ButterKnife.bind(this);
 
         _nameText = (EditText) findViewById(R.id.input_name);
-        _eventname = (EditText) findViewById(R.id.input_address);
+        _eventname = (EditText) findViewById(R.id.input_event);
         _emailText = (EditText) findViewById(R.id.input_email);
         _mobileText = (EditText) findViewById(R.id.input_mobile);
         _signupButton = (Button) findViewById(R.id.btn_signup);

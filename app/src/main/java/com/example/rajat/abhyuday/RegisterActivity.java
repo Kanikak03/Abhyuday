@@ -1,6 +1,7 @@
 package com.example.rajat.abhyuday;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
@@ -37,6 +38,7 @@ public class RegisterActivity extends AsyncTask<String,Void,String> {
         }
         else {
             Toast.makeText(context,"Record Inserted. Status --> "+s,Toast.LENGTH_LONG).show();
+
         }
 
     }

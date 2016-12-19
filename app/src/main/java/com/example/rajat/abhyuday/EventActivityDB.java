@@ -2,6 +2,7 @@ package com.example.rajat.abhyuday;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -20,6 +21,8 @@ import java.net.URL;
  */
 public class EventActivityDB extends AsyncTask<String,Void,String> {
 
+    //private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 0;
+    String mobiletxt="";
     Context context;
     public EventActivityDB(Context context) {
 
@@ -36,6 +39,9 @@ public class EventActivityDB extends AsyncTask<String,Void,String> {
             Toast.makeText(context,"Could  not insert the record",Toast.LENGTH_LONG).show();
         }
         else {
+//            System.out.println(mobiletxt);
+//            SmsManager smsManager = SmsManager.getDefault();////inside function////////////
+//            smsManager.sendTextMessage(mobiletxt.toString(), null, "You have registered ! see you at the fest", null, null);
             Toast.makeText(context,"Record Inserted. Status --> "+s,Toast.LENGTH_LONG).show();
         }
 
@@ -48,7 +54,7 @@ public class EventActivityDB extends AsyncTask<String,Void,String> {
             String email = (String) arg0[1];
             String mobile= (String) arg0[2];
             String event = (String) arg0[3];
-
+            mobiletxt=mobile;
 
             String link = IPAddress.IP+"EventInsert.php?name=" + name + "&email=" + email +"&mobile="
                     + mobile + "&event=" + event ;

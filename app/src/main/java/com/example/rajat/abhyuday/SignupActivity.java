@@ -127,11 +127,11 @@ public class SignupActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(final String... arg0) {
-            final String name = (String) arg0[0];
-            final String email = (String) arg0[1];
-            final String mobile= (String) arg0[2];
-            final String address = (String) arg0[3];
-            final String password =(String) arg0[4];
+//            final String name = (String) arg0[0];
+//            final String email = (String) arg0[1];
+//            final String mobile= (String) arg0[2];
+//            final String address = (String) arg0[3];
+//            final String password =(String) arg0[4];
 
             runOnUiThread(new Runnable() {
                 @Override
@@ -202,8 +202,10 @@ public class SignupActivity extends AppCompatActivity {
     public void onSignupSuccess() {
         _signupButton.setEnabled(true);
         setResult(RESULT_OK, null);
+        Intent mHome = new Intent(SignupActivity.this, Home.class);
+        SignupActivity.this.startActivity(mHome);
+        SignupActivity.this.finish();
 
-        finish();
     }
 
     public void onSignupFailed() {

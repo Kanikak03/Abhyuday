@@ -1,6 +1,7 @@
 package com.example.rajat.abhyuday;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,18 +14,37 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//import butterknife.ButterKnife;
-//import butterknife.Bind;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URL;
+import java.util.List;
+
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
+
+    Context context;
 
   EditText _emailText;
      EditText _passwordText;
     Button _loginButton;
      TextView _signupLink;
     TextView _link_guest;
+
+    HttpPost httppost;
+    StringBuffer buffer;
+    HttpResponse response;
+    HttpClient httpclient;
+    List<NameValuePair> nameValuePairs;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,61 +99,70 @@ public class LoginActivity extends AppCompatActivity {
 
         _loginButton.setEnabled(false);
 
-        new loginTask().execute();
+        new loginTask().execute(_emailText.getText().toString(),_passwordText.getText().toString());
 
     }
-    private class loginTask extends AsyncTask<String,Void,Void> {
-        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
-                R.style.AppTheme_Dark_Dialog);
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
+    private class loginTask extends AsyncTask<String,Void,String> {
 
-
-            progressDialog.setIndeterminate(true);
-            progressDialog.setMessage("Authenticating...");
-            progressDialog.show();
-        }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            new android.os.Handler().postDelayed(
-                    new Runnable() {
-                        public void run() {
-                            // On complete call either onLoginSuccess or onLoginFailed
-//
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
 
-                            progressDialog.dismiss();
+                        // On complete call either onLoginSuccess or onLoginFailed
+                          if (s.equals("failure")) {
+
+                            onLoginFailed();
                         }
-                    }, 3000);
-        }
+                        else {
+                            System.out.print(s);
+                            onLoginSuccess();
 
+                        }
+
+                        }
         @Override
-        protected void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
-        }
+        protected String doInBackground(String... params) {
 
-        @Override
-        protected Void doInBackground(String... params) {
 
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-
-                    String email = _emailText.getText().toString();
-                    String password = _passwordText.getText().toString();
+                    String email = params[0];
+                    String password = params[1];
 
                     if (email.equals("admin@admin.com") && password.equals("admin")) {
                        onLoginSuccess();
                     } else {
-                        onLoginFailed();
+                        // to check for other users
+                        try {
+                            String link = IPAddress.IP + "login_user.php?username=" + email + "&password=" + password;
+                            System.out.println(link + "");
+
+                            URL url = new URL(link);
+                            HttpClient client = new DefaultHttpClient();
+                            HttpGet request = new HttpGet();
+                            request.setURI(new URI(link));
+                            HttpResponse response = client.execute(request);
+                            BufferedReader in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+
+                            StringBuffer sb = new StringBuffer("");
+                            String line = "";
+
+                            while ((line = in.readLine()) != null) {
+                                sb.append(line);
+                                Log.i("INFO", "Line ---> " + line);
+                                break;
+                            }
+                            in.close();
+                            String result=sb.toString();
+                            System.out.print(result);
+                            return result;
+                        }
+                        catch (Exception e) {
+                            return new String("Exception: " + e.getMessage());
+                        }
                     }
 
-
-                }
-            });
             return null;
+
         }
 
     }
@@ -159,7 +188,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
         //Toast.makeText(getApplicationContext(), _emailText.toString(), Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(getApplicationContext(), Home.class);
+        Intent intent = new Intent(getApplicationContext(), EventAdd_Admin.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         //finish();
@@ -180,7 +209,8 @@ public class LoginActivity extends AppCompatActivity {
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        if (email.isEmpty()) {
+           // || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() - validation not required for now
             _emailText.setError("enter a valid email address");
             valid = false;
         } else {

@@ -109,19 +109,13 @@ public class RegisterFragment extends Fragment {
     }
 
 
-    public void insert(View v)
-    {
+    public void insert(View v) {
 
-        name=(EditText)getView().findViewById(R.id.reg_name);
-        email=(EditText)getView().findViewById(R.id.reg_id);
-        mobile=(EditText)getView().findViewById(R.id.reg_mob);
-        address=(EditText)getView().findViewById(R.id.reg_add);
-        password=(EditText)getView().findViewById(R.id.reg_pass);
-        String sname=name.getText().toString();
-        String semail=email.getText().toString();
-        String smob=mobile.getText().toString();
-        String sadd=address.getText().toString();
-        String spass=password.getText().toString();
+        name = (EditText) getView().findViewById(R.id.reg_name);
+        email = (EditText) getView().findViewById(R.id.reg_id);
+        mobile = (EditText) getView().findViewById(R.id.reg_mob);
+        address = (EditText) getView().findViewById(R.id.reg_add);
+        password = (EditText) getView().findViewById(R.id.reg_pass);
     }
 
     @Override

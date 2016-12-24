@@ -17,12 +17,13 @@ import java.net.URI;
 import java.net.URL;
 
 /**
- * Created by rajat on 08-11-2016.
+ * Created by rajat on 24-12-2016.
  */
-public class RegisterActivity extends AsyncTask<String,Void,String> {
+
+public class Event_add_Admin_DB extends AsyncTask<String,Void,String> {
 
     Context context;
-    public RegisterActivity(Context context) {
+    public Event_add_Admin_DB(Context context) {
 
         this.context=context;
     }
@@ -37,6 +38,7 @@ public class RegisterActivity extends AsyncTask<String,Void,String> {
             Toast.makeText(context,"Could  not insert the record",Toast.LENGTH_LONG).show();
         }
         else {
+//
             Toast.makeText(context,"Record Inserted. Status --> "+s,Toast.LENGTH_LONG).show();
 
         }
@@ -46,14 +48,14 @@ public class RegisterActivity extends AsyncTask<String,Void,String> {
     @Override
     protected String doInBackground(String... arg0) {
         try {
-            String name = (String) arg0[0];
-            String email = (String) arg0[1];
-            String mobile= (String) arg0[2];
-            String address = (String) arg0[3];
-            String password =(String) arg0[4];
+            String name =  arg0[0];
+            String detail = arg0[1];
+            String cp1=  arg0[2];
+            String cp2 = arg0[3];
 
-            String link = IPAddress.IP+"RegisterInsert.php?name=" + name + "&password=" + password + "&email=" + email +"&mobile="
-                    + mobile + "&address=" + address ;
+
+            String link = IPAddress.IP+"adminEvent.php?name=" + name + "&detail=" + detail +"&cp1="
+                    + cp1 + "&cp2=" + cp2 ;
             System.out.println(link+"");
 
             URL url = new URL(link);
@@ -72,7 +74,6 @@ public class RegisterActivity extends AsyncTask<String,Void,String> {
                 break;
             }
             in.close();
-            System.out.print(sb.toString());
             return sb.toString();
         }
         catch (Exception e) {

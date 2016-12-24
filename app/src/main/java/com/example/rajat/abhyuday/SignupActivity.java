@@ -64,8 +64,6 @@ public class SignupActivity extends AppCompatActivity {
         _loginLink=(TextView)findViewById(R.id.link_login);
 
 
-
-
         _signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,57 +83,30 @@ public class SignupActivity extends AppCompatActivity {
         });
 
 
-        name = _nameText.getText().toString();
-        address = _addressText.getText().toString();
-        email = _emailText.getText().toString();
-        mobile = _mobileText.getText().toString();
-        password = _passwordText.getText().toString();
+
 
 
     }
 
     //register task
     private class RegisterTask extends AsyncTask<String,Void,String> {
-        final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this,
-                R.style.AppTheme_Dark_Dialog);
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
 
-
-            progressDialog.setIndeterminate(true);
-            progressDialog.setMessage("Creating Account...");
-            progressDialog.show();
-        }
 
         @Override
         protected void onPostExecute(final String s) {
             super.onPostExecute(s);
-            new android.os.Handler().postDelayed(
-                    new Runnable() {
-                        public void run() {
-                            // On complete call either onLoginSuccess or onLoginFailed
-                            progressDialog.dismiss();
-                        }
-                    }, 3000);
         }
 
-        @Override
-        protected void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
-        }
+
+
 
         @Override
         protected String doInBackground(final String... arg0) {
-//            final String name = (String) arg0[0];
-//            final String email = (String) arg0[1];
-//            final String mobile= (String) arg0[2];
-//            final String address = (String) arg0[3];
-//            final String password =(String) arg0[4];
-
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
+             String name =  arg0[0];
+            String email =  arg0[1];
+          String mobile=  arg0[2];
+      String address =  arg0[3];
+            String password = arg0[4];
 
                     try{
 
@@ -172,8 +143,6 @@ public class SignupActivity extends AppCompatActivity {
                     catch (Exception e) {
                         System.out.print(("Exception: " + e.getMessage()));
                     }
-                }
-            });
             return null;
         }
 
@@ -189,13 +158,16 @@ public class SignupActivity extends AppCompatActivity {
         }
         else
         {
+            name = _nameText.getText().toString();
+            address = _addressText.getText().toString();
+            email = _emailText.getText().toString();
+            mobile = _mobileText.getText().toString();
+            password = _passwordText.getText().toString();
             new RegisterTask().execute(name,email,mobile,address,password);
 
         }
 
         _signupButton.setEnabled(false);
-
-
     }
 
 

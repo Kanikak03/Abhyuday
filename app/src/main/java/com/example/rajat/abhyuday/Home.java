@@ -51,7 +51,7 @@ import static com.example.rajat.abhyuday.R.string;
 //import android.app.Fragment;
 
 public class Home extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, CallFragment.OnFragmentInteractionListener, RegisterFragment.OnFragmentInteractionListener,ListEventFragment.OnFragmentInteractionListener, OnMapReadyCallback {
+        implements NavigationView.OnNavigationItemSelectedListener,  CallFragment.OnFragmentInteractionListener,RegisterFragment.OnFragmentInteractionListener,ListEventFragment.OnFragmentInteractionListener, OnMapReadyCallback {
 
 
     SupportMapFragment smapfragment;

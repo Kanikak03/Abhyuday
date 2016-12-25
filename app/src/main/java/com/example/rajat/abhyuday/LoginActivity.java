@@ -112,11 +112,11 @@ public class LoginActivity extends AppCompatActivity {
                         // On complete call either onLoginSuccess or onLoginFailed
                           if (s.equals("failure")) {
 
-                            onLoginFailed();
+                            onLoginFailedUser();
                         }
                         else {
                             System.out.print(s);
-                            onLoginSuccess();
+                            onLoginSuccessUser();
 
                         }
 
@@ -164,6 +164,28 @@ public class LoginActivity extends AppCompatActivity {
             return null;
 
         }
+
+    }
+
+    private void onLoginSuccessUser() {
+        _loginButton.setEnabled(true);
+        //Toast.makeText(getApplicationContext(), _emailText.toString(), Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(getApplicationContext(), Home.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        //finish();
+        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+        //finish();
+    }
+
+    private void onLoginFailedUser() {
+        _loginButton.setEnabled(true);
+        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        //finish();
+
 
     }
 

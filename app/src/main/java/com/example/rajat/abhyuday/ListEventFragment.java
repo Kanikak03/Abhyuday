@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -28,7 +29,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -79,6 +82,18 @@ public class ListEventFragment extends ListFragment implements OnItemClickListen
     }
 
     @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+
+    }
+
+    @Override
+    public void setListAdapter(ListAdapter adapter) {
+        super.setListAdapter(adapter);
+
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
@@ -91,8 +106,47 @@ public class ListEventFragment extends ListFragment implements OnItemClickListen
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Object obj=getListAdapter().getItem(position);
         // on click of the event what should happen will come here
+
+        Object obj=getListAdapter().getItem(position);
+        String event=obj.toString();
+        //Delete the event on the click of the button
+        System.out.print(event);
+        try {
+            String link = IPAddress.IP + "deleteEventUser.php?event=" + event;
+            System.out.println(link + "");
+
+            URL url = new URL(link);
+            HttpClient client = new DefaultHttpClient();
+            HttpGet request = new HttpGet();
+            request.setURI(new URI(link));
+            HttpResponse response = client.execute(request);
+            BufferedReader in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+
+            StringBuffer sb = new StringBuffer("");
+            String line = "";
+
+            while ((line = in.readLine()) != null) {
+                sb.append(line);
+                Log.i("INFO", "Line ---> " + line);
+                break;
+            }
+            in.close();
+            String result=sb.toString();
+            System.out.print(result);
+            if (result.isEmpty()) {
+
+                Toast.makeText(getContext(),"Did not delete the event",Toast.LENGTH_LONG).show();
+            }
+            else {
+
+                Toast.makeText(getContext(),"delete the event",Toast.LENGTH_LONG).show();
+
+            }
+        }
+        catch (Exception e) {
+            Log.i("INFO", "Line ---> " + e.getMessage());
+        }
 
     }
 
@@ -160,6 +214,22 @@ public class ListEventFragment extends ListFragment implements OnItemClickListen
         } catch (IOException e) {
             Log.d("HTTPCLIENT", e.getLocalizedMessage());
         }
+
+//        lv.setTextFilterEnabled(true);
+//
+//        lv.setOnItemClickListener(new OnItemClickListener() {
+//            public void onItemClick(AdapterView<?> parent, View view,
+//                                    int position, long id) {
+
+//                onItemClick(parent,view,position,id);
+//                Object obj=getListAdapter().getItem(position);
+//                String event=obj.toString();
+//                // When clicked, show a toast with the TextView text
+//                Toast.makeText(getContext(),event
+//                        , Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
     }
 
     @Override

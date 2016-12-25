@@ -2,10 +2,13 @@ package com.example.rajat.abhyuday;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ListFragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +32,7 @@ public class CallFragment extends ListFragment implements OnItemClickListener{
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1 ;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -73,13 +77,12 @@ public class CallFragment extends ListFragment implements OnItemClickListener{
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Object obj=getListAdapter().getItem(position);
         String num=obj.toString();
+
         Intent intent=new Intent(Intent.ACTION_DIAL,Uri.parse("tel:"+num));
         //intent.setPackage("com.android.phone");
         //intent.setPackage("com.android.server.telecom");
         //intent.setData();
         startActivity(intent);
-
-
 
     }
 
@@ -87,8 +90,6 @@ public class CallFragment extends ListFragment implements OnItemClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-
 
         return inflater.inflate(R.layout.fragment_call, container, false);
     }

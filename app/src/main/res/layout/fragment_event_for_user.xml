@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.rajat.abhyuday.ListEventFragment"
-    android:background="#ffffff">
+    android:background="#ffffff"
+    android:descendantFocusability="blocksDescendants"
+    android:clickable="true">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -11,5 +13,6 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@android:id/list" />
+        android:id="@android:id/list"
+        android:clickable="true"/>
 </FrameLayout>

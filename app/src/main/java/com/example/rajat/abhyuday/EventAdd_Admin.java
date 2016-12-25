@@ -1,5 +1,6 @@
 package com.example.rajat.abhyuday;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -98,5 +99,13 @@ public class EventAdd_Admin extends AppCompatActivity {
         }
 
         return valid;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent mHome = new Intent(EventAdd_Admin.this, AdminOptionsActivity.class);
+        EventAdd_Admin.this.startActivity(mHome);
+        EventAdd_Admin.this.finish();
     }
 }

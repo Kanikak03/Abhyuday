@@ -98,8 +98,13 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         _loginButton.setEnabled(false);
+        if (_emailText.getText().toString().equals("admin@admin.com") && _passwordText.getText().toString().equals("admin")) {
+            onLoginSuccess();
+        }
+        else {
 
-        new loginTask().execute(_emailText.getText().toString(),_passwordText.getText().toString());
+            new loginTask().execute(_emailText.getText().toString(), _passwordText.getText().toString());
+        }
 
     }
     private class loginTask extends AsyncTask<String,Void,String> {
@@ -128,9 +133,7 @@ public class LoginActivity extends AppCompatActivity {
                     String email = params[0];
                     String password = params[1];
 
-                    if (email.equals("admin@admin.com") && password.equals("admin")) {
-                       onLoginSuccess();
-                    } else {
+
                         // to check for other users
                         try {
                             String link = IPAddress.IP + "login_user.php?username=" + email + "&password=" + password;
@@ -159,13 +162,14 @@ public class LoginActivity extends AppCompatActivity {
                         catch (Exception e) {
                             return new String("Exception: " + e.getMessage());
                         }
+            //return null;
                     }
 
-            return null;
+
 
         }
 
-    }
+
 
     private void onLoginSuccessUser() {
         _loginButton.setEnabled(true);
@@ -210,7 +214,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
         //Toast.makeText(getApplicationContext(), _emailText.toString(), Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(getApplicationContext(), EventAdd_Admin.class);
+        Intent intent = new Intent(getApplicationContext(), AdminOptionsActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         //finish();

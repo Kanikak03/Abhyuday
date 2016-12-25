@@ -26,8 +26,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 public class RegisterEvent extends AppCompatActivity {
     private static final String TAG = "RegisterEvent";
     EditText _nameText;
+    EditText _collegename;
     EditText _eventname;
-    EditText _emailText;
     EditText _mobileText;
     Button _signupButton;
     /**
@@ -45,7 +45,7 @@ public class RegisterEvent extends AppCompatActivity {
 
         _nameText = (EditText) findViewById(R.id.input_name);
         _eventname = (EditText) findViewById(R.id.input_event);
-        _emailText = (EditText) findViewById(R.id.input_email);
+        _collegename = (EditText) findViewById(R.id.input_college);
         _mobileText = (EditText) findViewById(R.id.input_mobile);
         _signupButton = (Button) findViewById(R.id.btn_signup);
 
@@ -75,10 +75,10 @@ public class RegisterEvent extends AppCompatActivity {
 
         String name = _nameText.getText().toString();
         String address = _eventname.getText().toString();
-        String email = _emailText.getText().toString();
+        String college = _collegename.getText().toString();
         String mobile = _mobileText.getText().toString();
 
-        new EventActivityDB(this).execute(name, email, mobile, address);
+        new EventActivityDB(this).execute(name, college, mobile, address);
     }
         // TODO: Implement your own signup logic here.
 
@@ -87,7 +87,7 @@ public class RegisterEvent extends AppCompatActivity {
 
         String name = _nameText.getText().toString();
         String address = _eventname.getText().toString();
-        String email = _emailText.getText().toString();
+        String email = _collegename.getText().toString();
         String mobile = _mobileText.getText().toString();
 
 
@@ -106,11 +106,11 @@ public class RegisterEvent extends AppCompatActivity {
         }
 
 
-        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            _emailText.setError("enter a valid email address");
+        if (email.isEmpty()) {
+            _collegename.setError("enter a valid email address");
             valid = false;
         } else {
-            _emailText.setError(null);
+            _collegename.setError(null);
         }
 
         if (mobile.isEmpty() || mobile.length() != 10) {

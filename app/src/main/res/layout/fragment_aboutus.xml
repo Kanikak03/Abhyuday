@@ -1,0 +1,93 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.rajat.abhyuday.CallFragment"
+
+    android:background="@drawable/background1">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="56dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:weightSum="1">
+
+    <TextView android:id="@+id/about"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="Abhyuday"
+        android:gravity="center"
+        android:textSize="24dip"
+        android:textColor="@color/red"/>
+
+        <VideoView
+            android:id="@+id/videoView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:background="@android:color/transparent" />
+
+        <TextView android:id="@+id/about_us"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="Abhyuday is an annual inter-collegiate technical fest organized by the Department of Computer Applications at MSRIT, which serves as an excellent platform for students from various colleges to disp- lay their talents and ideas!Abhyuday 2.0, conducted last year was a grand success. There were 230 participants from 18 colle- ges.
+             A string of 8 UG and 10 PG events were condu- cted in two days."
+            android:gravity="center"
+            android:textSize="16dip"
+            android:textColor="@color/white"
+            />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/action_yt"
+                android:id="@+id/btn_yt" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/action_g_plus"
+                android:id="@+id/btn_gplus" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/action_fb"
+                android:id="@+id/btn_fb"
+                android:layout_weight="0.02" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/action_insta"
+                android:id="@+id/btn_insta"
+                android:layout_weight="0.01" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>

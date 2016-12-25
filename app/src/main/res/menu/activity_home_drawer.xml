@@ -4,16 +4,16 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_event"
-            android:icon="@drawable/ic_event_available_black_24dp"
-            android:title="Events" />
+            android:icon="@drawable/ic_date_range_black_24dp"
+            android:title="All Events" />
         <!--<item-->
             <!--android:id="@+id/nav_register"-->
             <!--android:icon="@drawable/ic_border_color_black_24dp"-->
             <!--android:title="Register" />-->
         <item
             android:id="@+id/nav_schedule"
-            android:icon="@drawable/ic_date_range_black_24dp"
-            android:title="Schedule " />
+            android:icon="@drawable/ic_event_available_black_24dp"
+            android:title="My Events " />
         <item
             android:id="@+id/nav_abtus"
             android:icon="@drawable/ic_info_black_24dp"

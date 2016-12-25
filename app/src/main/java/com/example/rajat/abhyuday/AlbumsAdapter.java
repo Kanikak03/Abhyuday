@@ -128,11 +128,11 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
                             "1ST PLACE Rs 4000\n" +
                             "2ND PLACE Rs 2000");
                 }
-                else if(album.getName().equals("Debate"))
-                {
-                    intent.putExtra("desc","type the description of coding");
-                    intent.putExtra("rules","type the rules for coding");
-                }
+//                else if(album.getName().equals("Debate"))
+//                {
+//                    intent.putExtra("desc","type the description of coding");
+//                    intent.putExtra("rules","type the rules for coding");
+//                }
                 else if(album.getName().equals("Web Designing"))
                 {
                     intent.putExtra("desc"," Web Developer ? Bored of the routine? Gear up your creative thoughts and add a little funk to the WEB. Come join us in the quest to find the best!\n" +

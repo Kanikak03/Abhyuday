@@ -51,7 +51,7 @@ import static com.example.rajat.abhyuday.R.string;
 //import android.app.Fragment;
 
 public class Home extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,  CallFragment.OnFragmentInteractionListener,RegisterFragment.OnFragmentInteractionListener,ListEventFragment.OnFragmentInteractionListener, OnMapReadyCallback {
+        implements NavigationView.OnNavigationItemSelectedListener,  Aboutus_fragment.OnFragmentInteractionListener, CallFragment.OnFragmentInteractionListener,RegisterFragment.OnFragmentInteractionListener,ListEventFragment.OnFragmentInteractionListener, OnMapReadyCallback {
 
 
     SupportMapFragment smapfragment;
@@ -180,6 +180,9 @@ public class Home extends AppCompatActivity
             fm.beginTransaction().replace(R.id.content_home, callFragment).commit();
 
         } else if (id == R.id.nav_abtus) {
+
+            Aboutus_fragment aboutus_fragment = new Aboutus_fragment();
+            fm.beginTransaction().replace(R.id.content_home, aboutus_fragment).commit();
 
         }
         drawer.closeDrawer(GravityCompat.START);

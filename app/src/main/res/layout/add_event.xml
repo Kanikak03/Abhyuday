@@ -36,7 +36,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:hint="Event Name" />
+                android:hint="Event Name"
+                android:textColor="#ffffff"
+                />
         </android.support.design.widget.TextInputLayout>
 
 
@@ -49,7 +51,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textLongMessage"
-                android:hint="Event Description" />
+                android:hint="Event Description"
+                android:textColor="#ffffff"
+                />
         </android.support.design.widget.TextInputLayout>
 
 
@@ -62,7 +66,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:hint="Cash Price 1st Place"/>
+                android:hint="Cash Price 1st Place"
+                android:textColor="#ffffff"
+                />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -75,7 +81,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:hint="Cash Price 2nd Place"/>
+                android:hint="Cash Price 2nd Place"
+                android:textColor="#ffffff"
+                />
 
         </android.support.design.widget.TextInputLayout>
 

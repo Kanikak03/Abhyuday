@@ -104,14 +104,14 @@ public class EventActivity extends AppCompatActivity {
         Album a = new Album("Coding", 2, covers[0]);
         albumList.add(a);
 
-        a = new Album("Debugging", 2, covers[1]);
-        albumList.add(a);
+//        a = new Album("Debugging", 2, covers[1]);
+//        albumList.add(a);
 
         a = new Album("Gaming", 4, covers[2]);
         albumList.add(a);
 
-        a = new Album("Debate", 1, covers[3]);
-        albumList.add(a);
+//        a = new Album("Debate", 1, covers[3]);
+//        albumList.add(a);
 
         a = new Album("Web Designing", 2, covers[4]);
         albumList.add(a);

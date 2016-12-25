@@ -51,7 +51,7 @@ import static com.example.rajat.abhyuday.R.string;
 //import android.app.Fragment;
 
 public class Home extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, CallFragment.OnFragmentInteractionListener, RegisterFragment.OnFragmentInteractionListener, OnMapReadyCallback {
+        implements NavigationView.OnNavigationItemSelectedListener, CallFragment.OnFragmentInteractionListener, RegisterFragment.OnFragmentInteractionListener,ListEventFragment.OnFragmentInteractionListener, OnMapReadyCallback {
 
 
     SupportMapFragment smapfragment;
@@ -160,6 +160,8 @@ public class Home extends AppCompatActivity
             Home.this.finish();
 
         } else if (id == R.id.nav_schedule) {
+            ListEventFragment listEventFragment = new ListEventFragment();
+            fm.beginTransaction().replace(R.id.content_home, listEventFragment).commit();
         }
 
 //

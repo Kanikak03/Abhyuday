@@ -82,26 +82,12 @@ public class ListEventFragment extends ListFragment implements OnItemClickListen
     }
 
     @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
-
-    }
-
-    @Override
-    public void setListAdapter(ListAdapter adapter) {
-        super.setListAdapter(adapter);
-
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
     }
 
     @Override
@@ -136,11 +122,12 @@ public class ListEventFragment extends ListFragment implements OnItemClickListen
             System.out.print(result);
             if (result.isEmpty()) {
 
-                Toast.makeText(getContext(),"Did not delete the event",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),"Could not delete the event",Toast.LENGTH_LONG).show();
             }
             else {
 
-                Toast.makeText(getContext(),"delete the event",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),"You have unregistered from the event",Toast.LENGTH_LONG).show();
+                connect();
 
             }
         }
@@ -179,6 +166,8 @@ public class ListEventFragment extends ListFragment implements OnItemClickListen
         String data;
         List<String> r = new ArrayList<String>();
         ArrayAdapter<String>adapter=new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,r);
+        setListAdapter(adapter);
+        getListView().setOnItemClickListener((OnItemClickListener) this);
         ListView lv=(ListView)getView().findViewById(android.R.id.list);
         try {
 
@@ -214,21 +203,6 @@ public class ListEventFragment extends ListFragment implements OnItemClickListen
         } catch (IOException e) {
             Log.d("HTTPCLIENT", e.getLocalizedMessage());
         }
-
-//        lv.setTextFilterEnabled(true);
-//
-//        lv.setOnItemClickListener(new OnItemClickListener() {
-//            public void onItemClick(AdapterView<?> parent, View view,
-//                                    int position, long id) {
-
-//                onItemClick(parent,view,position,id);
-//                Object obj=getListAdapter().getItem(position);
-//                String event=obj.toString();
-//                // When clicked, show a toast with the TextView text
-//                Toast.makeText(getContext(),event
-//                        , Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
     }
 

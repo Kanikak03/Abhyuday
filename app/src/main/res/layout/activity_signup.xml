@@ -46,7 +46,7 @@
             <EditText android:id="@+id/input_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Address"
+                android:hint="College Name"
                 android:inputType="textPostalAddress" />
         </android.support.design.widget.TextInputLayout>
 

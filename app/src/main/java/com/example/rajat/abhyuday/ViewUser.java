@@ -46,20 +46,20 @@ public class ViewUser extends AppCompatActivity{
     public void connect_to_db() {
         String data;
         List<String> r = new ArrayList<String>();
-       // ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, r);
-        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_2, android.R.id.text1, r) {
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
-                TextView text1 = (TextView) findViewById(android.R.id.text1);
-                TextView text2 = (TextView) findViewById(android.R.id.text2);
-
-                text1.setText(ViewUser.name);
-                text2.setText(ViewUser.event);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, r);
+//        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_2, android.R.id.text1, r) {
+//            @Override
+//            public View getView(int position, View convertView, ViewGroup parent) {
+//                View view = super.getView(position, convertView, parent);
+//                TextView text1 = (TextView) findViewById(android.R.id.text1);
+//                TextView text2 = (TextView) findViewById(android.R.id.text2);
 //
-                return view;
-            }
-        };
+//                text1.setText(ViewUser.name);
+//                text2.setText(ViewUser.event);
+////
+//                return view;
+//            }
+//        };
 
         ListView lv = (ListView) findViewById(android.R.id.list);
         try {

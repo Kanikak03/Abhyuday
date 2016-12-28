@@ -222,8 +222,8 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
         PopupMenu popup = new PopupMenu(mContext, view);
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.menu_album, popup.getMenu());
-        popup.setOnMenuItemClickListener(new MyMenuItemClickListener());
-        popup.show();
+//        popup.setOnMenuItemClickListener(new MyMenuItemClickListener());
+//        popup.show();
     }
 
     @Override
@@ -250,23 +250,28 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
     /**
      * Click listener for popup menu items
      */
-    class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
-
-        public MyMenuItemClickListener() {
-        }
-
-        @Override
-        public boolean onMenuItemClick(MenuItem menuItem) {
-            switch (menuItem.getItemId()) {
-                case R.id.action_add_favourite:
-                    Toast.makeText(mContext, "Register", Toast.LENGTH_SHORT).show();
-                    return true;
-                //case R.id.action_play_next:
-                  //  Toast.makeText(mContext, "Register", Toast.LENGTH_SHORT).show();
-                    //return true;
-                default:
-            }
-            return false;
-        }
-    }
+//    class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
+//
+//        public MyMenuItemClickListener() {
+//        }
+//
+//        @Override
+//        public boolean onMenuItemClick(MenuItem menuItem) {
+//            switch (menuItem.getItemId()) {
+//                case R.id.action_add_favourite:
+//
+//                    Intent mHome = new Intent(AlbumsAdapter.this, RegisterEvent.class);
+//                    eventdetails.this.startActivity(mHome);
+//                    eventdetails.this.finish();
+//
+//                    Toast.makeText(mContext, "Register", Toast.LENGTH_SHORT).show();
+//                    return true;
+//                //case R.id.action_play_next:
+//                  //  Toast.makeText(mContext, "Register", Toast.LENGTH_SHORT).show();
+//                    //return true;
+//                default:
+//            }
+//            return false;
+//        }
+//    }
 }

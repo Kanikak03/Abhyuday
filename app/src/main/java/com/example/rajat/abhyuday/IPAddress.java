@@ -6,7 +6,7 @@ package com.example.rajat.abhyuday;
 
 public final class IPAddress {
 
-    static String IP="http://192.168.1.9/";
+    static String IP="http://192.168.43.121/";
 
 }
 
